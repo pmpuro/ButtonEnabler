@@ -1,0 +1,3 @@
+rootProject.name = "ClickerExampleApp"
+include ':app'
+include ':ButtonEnabler'
