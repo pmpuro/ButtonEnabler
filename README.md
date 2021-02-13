@@ -21,7 +21,7 @@ allprojects {
 And, add the dependency in your module's build.gradle:
 ```groovy
 dependencies {
-	        implementation 'com.github.pmpuro:ButtonEnabler:Tag'
+	        implementation 'com.github.pmpuro.ButtonEnabler:ButtonEnabler:0.1.4'
 	}
 ```
 
