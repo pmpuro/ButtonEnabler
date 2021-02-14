@@ -133,6 +133,48 @@ class ButtonEnablerTest {
         )
     }
 
+    @Test
+    fun `handleClicks returns the exception`() = runBlockingTest {
+        val message = "example exception"
+
+        val tested = ButtonEnabler(this) {
+            throw IOException(message)
+        }
+
+        var result: Throwable? = null
+        val starter = async(this.coroutineContext) {
+            result = tested.handleClicks()
+        }
+
+        tested.apply {
+            click()
+            close()
+        }
+
+        starter.await()
+        Truth.assertThat(result).isInstanceOf(IOException::class.java)
+    }
+
+    @Test
+    fun `null returned if no exception`() = runBlockingTest {
+        val emptyAction: suspend () -> Unit = {}
+
+        val tested = ButtonEnabler(this, emptyAction)
+
+        var result: Throwable? = null
+        val handler = async(this.coroutineContext) {
+            result = tested.handleClicks()
+        }
+
+        tested.apply {
+            click()
+            close()
+        }
+
+        handler.await()
+        Truth.assertThat(result).isNull()
+    }
+
     private fun MutableList<String>.addEvent(enabled: Boolean) =
         add(if (enabled) KEY_ENABLED else KEY_DISABLED)
 }

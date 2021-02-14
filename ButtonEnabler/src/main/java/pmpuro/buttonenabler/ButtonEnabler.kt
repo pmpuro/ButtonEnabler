@@ -20,23 +20,29 @@ class ButtonEnabler(
     override val enabled: StateFlow<Boolean>
         get() = _enabled
 
-    // there should be a way to handle exceptions
-    suspend fun handleClicks() = clicks
-        .onEach {
-            _enabled.emit(false)
-            action()
-            _enabled.emit(true)
-        }
-        .catch {
-            _enabled.emit(true)
-        }
-        .collect()
+    suspend fun handleClicks(): Throwable? {
+        var result: Throwable? = null
+
+        clicks
+            .onEach {
+                _enabled.emit(false)
+                action()
+                _enabled.emit(true)
+            }
+            .catch {
+                result = it
+                _enabled.emit(true)
+            }
+            .collect()
+
+        return result
+    }
 
     override fun launchClick() {
         coroutineScope.launch {
             runCatching { click() }
                 .onFailure {
-                    Log.e("asdf", "failed to click")
+                    Log.e("ButtonEnabler", "failed to click")
                 }
         }
     }

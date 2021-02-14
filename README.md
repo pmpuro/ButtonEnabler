@@ -74,6 +74,7 @@ ClickerExampleAppTheme {
 ```
 
 And finally, you need to call `handleClicks()` function to start processing clicks. 
+See that `handleClicks()` returns with an exception thrown in the action.
 To finish call `close()` function, for example in your Activity's `onDestroy()` life cycle function.
 
 ```kotlin
@@ -93,10 +94,6 @@ override fun onDestroy() {
     clickHandler.close()
 }
 ```
-
-## TODO
-
-* Currently, there is no way to detect that handleClicks function fails due to exceptions.
 
 
 ## License
