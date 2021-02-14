@@ -1,13 +1,13 @@
 package pmpuro.buttonenabler
 
 import com.google.common.truth.Truth
-import junit.framework.Assert
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Assert
 import org.junit.Test
 import java.io.IOException
 
