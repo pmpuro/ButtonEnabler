@@ -8,14 +8,13 @@ android {
 
     defaultConfig {
         applicationId "pmpuro.clicker.clickerexampleapp"
-        minSdkVersion 29
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -40,7 +39,6 @@ android {
 }
 
 dependencies {
-
     implementation project(':ButtonEnabler')
 
     implementation 'androidx.core:core-ktx:1.3.2'
